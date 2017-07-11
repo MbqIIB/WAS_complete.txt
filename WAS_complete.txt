@@ -1,0 +1,660 @@
+
+=================================
+Url:-
+
+http://en.wikipedia.org/wiki/Websphere : Version compatability
+http://www.ibm.com/developerworks/downloads/ws/was/ :- WAS download
+
+
+====================================================
+
+
+Paths:-
+
+Bin directory for WAS       /opt/IBM/WebSphere/AppServer/bin
+Path of DMGR commands 	    /opt/IBM/WebSphere/AppServer/profiles/Dmgr01/bin
+Product Directory           /opt/IBM/WebSphere/AppServer
+Fix pack directory          /opt/IBM/WebSphere/AppServer
+Update installer directory  /opt/IBM/WebSphere/UpdateInstaller
+Version Directory           /opt/IBM/WebSphere/AppServer/properties/version
+DTD Directory               /opt/IBM/WebSphere/AppServer/properties/version/dtd
+Log Directory               /opt/IBM/WebSphere/AppServer/logs
+Backup Directory            /opt/IBM/WebSphere/AppServer/properties/version/nif/backup
+TMP Directory               /tmp
+
+
+===================================
+
+Ports:-
+
+Administrative console port 9060
+Administrative console secure port 9043
+HTTP transport port 9080
+HTTPS transport port 9443
+Boostrap port 2809
+SIP port 5060
+SIP secure port 5061
+SOAP connector port 8880
+Administrative interprocess communication port 9633
+SAS SSL ServerAuth port 9401
+CSIV2 ServerAuth listener port 9403
+CSIV2 MultiAuth listener port 9402
+ORB listener port 9100
+
+
+=========================================================================================
+
+Installation commands:-
+
+
+=========================================================================================
+										WAS7.0
+=========================================================================================
+
+To install WAS in GUI:- 
+./install
+
+During installation check the logs under
+/tmp/log.txt
+
+Post Installation check:-
+cat /opt/IBM/WebSphere/AppServer/logs/install/log.txt
+
+Exit code:- 0 (Success) 
+Exit code:- 1 (Failure)
+Exit code:- 2 (Partial Success)
+
+Version of WAS:-
+/opt/IBM/WebSphere/AppServer/bin/versionInfo.sh
+
+
+=========================================================================================
+							Installation of Fixpack v7.x
+=========================================================================================
+
+To install Fixpack for WAS7.0, needs to have update installer.
+./install
+
+Update installer default path:- /opt/IBM/WebSphere/UpdateInstaller
+
+To Install fixpack, needs to stop all profiles
+To check all available profiles
+/opt/IBM/WebSphere/AppServer/bin/manageprofiles.sh -listProfiles
+
+Status of profiles:-
+/opt/IBM/WebSphere/AppServer/bin/serverStatus.sh -all
+
+To check number of profiles created
+cat /opt/IBM/WebSphere/AppServer/properties/profileRegistry.xml
+
+To Install fixpack, go to the update installer path
+/opt/IBM/WebSphere/UpdateInstaller/update.sh 
+
+Fix pack Installation path:- 
+/opt/IBM/WebSphere/AppServer
+
+To verify the fix pack installation log:-
+/opt/IBM/WebSphere/UpdateInstaller/logs/tmp2/log.txt
+
+Exit code:- 0 (Success) 
+Exit code:- 1 (Failure)
+Exit code:- 2 (Partial Success)
+
+Version of WAS:-
+/opt/IBM/WebSphere/AppServer/bin/versionInfo.sh
+
+=========================================================================================
+							Un-Installation of Fixpack
+=========================================================================================
+
+To Un-install Fixpack of WAS7.0.0.31, needs to have update installer.
+./install
+
+Update installer default path:- /opt/IBM/WebSphere/UpdateInstaller
+
+To Install fixpack, needs to stop all profiles
+To check all available profiles
+/opt/IBM/WebSphere/AppServer/bin/manageprofiles.sh -listProfiles
+
+Status of profiles:-
+/opt/IBM/WebSphere/AppServer/bin/serverStatus.sh -all
+
+To check number of profiles created
+cat /opt/IBM/WebSphere/AppServer/properties/profileRegistry.xml
+
+To un-Install fixpack, go to the update installer path
+/opt/IBM/WebSphere/UpdateInstaller/update.sh 
+
+Fix pack un-Installation path:- 
+/opt/IBM/WebSphere/AppServer
+
+To verify the fix pack un-installation log:-
+/opt/IBM/WebSphere/UpdateInstaller/logs/tmp2/updatelog.txt
+
+Exit code:- 0 (Success) 
+Exit code:- 1 (Failure)
+Exit code:- 2 (Partial Success)
+
+Version of WAS:-
+/opt/IBM/WebSphere/AppServer/bin/versionInfo.sh
+
+=========================================================================================
+											WAS8.0
+=========================================================================================
+
+In WAS8.0 to install WAS we need to install Installation Manager.
+
+TO install IM silently
+./installc -acceptLicense
+
+To install WAS in GUI:- 
+open IM in directory /opt/IBM/Installation Manager/eclipse/IBMIM
+Go to File --> Preferences --> Select WAS disk1 path and install through IM
+
+To Silently install WAS in GUI:-
+./IBMIM -record /tmp/install_was.xml -skipInstall /tmp/imregistry
+
+Go to directory /opt/IBM/Installation Manager/eclipse/tools
+./imcl -acceptLicense -input /tmp/install_was.xml -log /tmp/install_was.log
+
+During installation check the logs under
+/tmp/log.txt
+
+Post Installation check:-
+cat /opt/IBM/WebSphere/AppServer/logs/install/log.txt
+
+Exit code:- 0 (Success) 
+Exit code:- 1 (Failure)
+Exit code:- 2 (Partial Success)
+
+Version of WAS:-
+/opt/IBM/WebSphere/AppServer/bin/versionInfo.sh
+
+=========================================================================================
+									TO un-install IM
+=========================================================================================
+
+/var/ibm/InstallationManager/uninstall
+./uninstallc
+
+TO un-install WAS in GUI:-
+open IM in directory /opt/IBM/Installation Manager/eclipse/IBMIM
+Click on un-install
+
+TO un-install WAS silently:-
+Go to directory /opt/IBM/Installation Manager/eclipse/
+./IBMIM -record /tmp/uninstall_was.xml -skipInstall /tmp/imregistry
+
+Go to directory /opt/IBM/Installation Manager/eclipse/tools
+./imcl -acceptLicense -input /tmp/uninstall_was.xml -log /tmp/uninstall_was.log
+
+
+=========================================================================================
+									un-Installation WAS
+=========================================================================================
+
+To un-install WAS in GUI:- 
+/opt/IBM/WebSphere/AppServer1/uninstall/uninstall
+
+During installation check the logs under
+/tmp/log.txt
+
+Exit code:- 0 (Success) 
+Exit code:- 1 (Failure)
+Exit code:- 2 (Partial Success)
+
+Version of WAS:-
+/opt/IBM/WebSphere/AppServer/bin/versionInfo.sh
+
+=========================================================================================
+								Profile creation - Custom
+=========================================================================================
+
+/opt/IBM/WebSphere/AppServer/bin/ProfileManagement/pmt.sh
+1) Select --> Custom
+2) Select Typical profile creation
+3) Click on Federate this node later
+4) Click on Create
+
+Verify the details of custom
+cat /opt/ibm/WebSphere/AppServer/profiles/Custom01/logs/AboutThisProfile.txt
+Application server environment to create: Custom
+Location: /opt/ibm/WebSphere/AppServer/profiles/Custom01
+Disk space required: 10 MB
+Profile name: Custom01
+Make this profile the default: True
+Node name: localhostNode01
+Host name: localhost
+Federate to deployment manager: False
+
+To check all available profiles
+/opt/IBM/WebSphere/AppServer/bin/manageprofiles.sh -listProfiles
+
+To check number of profiles created
+cat /opt/IBM/WebSphere/AppServer/properties/profileRegistry.xml
+
+Profile managament logs during creation
+cat /opt/ibm/WebSphere/AppServer/logs/manageprofiles/pmt.log
+
+=========================================================================================
+									Profile creation - Dmgr
+=========================================================================================
+
+GUI:
+/opt/IBM/WebSphere/AppServer/bin/ProfileManagement/pmt.sh
+1) Select --> Management
+2) Select Deployment Manager
+3) Select Typical profile creation
+4) Provide Admin console security credentials
+5) Click on Create
+
+Commandline:
+./manageprofiles.sh -create -profileName Dmgr01 -profilePath /app/IBM/WebSphere855/AppServer/profiles/Dmgr01 -templatePath /app/IBM/WebSphere855/AppServer/profileTemplates/management -cellName vsnuatapp1Cell01 -adminUserName wasadmin -adminPassword wasadmin -hostName vsnuatapp1
+
+Verify the details of Dmgr
+[root@oc8703457726 properties]# cat /opt/IBM/WebSphere/AppServer/profiles/Dmgr01/logs/AboutThisProfile.txt
+Application server environment to create: Management
+Location: /opt/IBM/WebSphere/AppServer/profiles/Dmgr01
+Disk space required: 30 MB
+Profile name: Dmgr01
+Make this profile the default: False
+Node name: localhostCellManager01
+Cell name: localhostCell01
+Host name: localhost
+Enable administrative security (recommended): True
+Administrative console port: 9060
+Administrative console secure port: 9043
+Management bootstrap port: 9809
+Management SOAP connector port: 8879
+Run Management as a service: False
+[root@oc8703457726 properties]# 
+
+TO Start DMGR
+/opt/IBM/WebSphere/AppServer/profiles/Dmgr01/bin/startManager.sh 
+
+Verify the Dmgr
+ps -ef | grep -i dmgr
+
+To check all available profiles
+/opt/IBM/WebSphere/AppServer/bin/manageprofiles.sh -listProfiles
+
+To check number of profiles created
+cat /opt/IBM/WebSphere/AppServer/properties/profileRegistry.xml
+
+Profile managament logs during creation
+/opt/ibm/WebSphere/AppServer/logs/manageprofiles/pmt.log
+
+TO Stop DMGR
+/opt/IBM/WebSphere/AppServer/profiles/Dmgr01/bin//stopManager.sh 
+
+To verify the properties of DMGR:-
+cat /opt/IBM/WebSphere/AppServer/profiles/Dmgr01/properties/portdef.props
+
+Login to admin console
+https://localhost:9043/ibm/console/
+
+=========================================================================================
+								Federating Custom server to Dmgr
+=========================================================================================
+
+1) Command Console
+Go to the path /opt/ibm/WebSphere/AppServer/profiles/Custom01/bin
+
+To check the port
+/opt/ibm/WebSphere/AppServer/profiles/Dmgr01/properties/portdef.props
+
+SOAP_CONNECTOR_ADDRESS=8879
+/opt/IBM/WebSphere/AppServer/profiles/AppSrv01/bin
+
+./addNode.sh localhost 8879 -username admin -password admin
+
+./addNode.sh vsnuatapp1 8879 -username wasadmin -password wasadmin
+
+
+=========================================================================================
+								Profile creation - Application Server
+=========================================================================================
+
+GUI:
+
+/opt/IBM/WebSphere/AppServer/bin/ProfileManagement/pmt.sh
+1) Select --> Application Server
+2) Select Typical profile creation
+3) Provide Admin console security credentials
+4) Click on Create
+
+Commandline:
+./manageprofiles.sh -create -profileName AppSrv01 -profilePath /app/IBM/WebSphere/AppServer/profiles/AppSrv01 -templatePath /app/IBM/WebSphere/AppServer/profileTemplates/managed -cellName tempCell01 -hostName vsnuatapp1 -nodeName vsnuatapp1Node01 -federateLater true
+
+./manageprofiles.sh -create -profileName AppSrv01 -profilePath "C:\Program Files\IBM\WebSphere\AppServer\profiles\AppSrv01" -templatePath "C:\Program Files\IBM\WebSphere\AppServer\profileTemplates\managed" -cellName tempCell01 -hostName localhost -nodeName uatapp1Node01 -federateLater true
+
+cat /opt/IBM/WebSphere/AppServer/profiles/AppSrv01/logs/AboutThisProfile.txt
+Application server environment to create: Application server
+Location: /opt/IBM/WebSphere/AppServer/profiles/AppSrv01
+Disk space required: 200 MB
+Profile name: AppSrv01
+Make this profile the default: False
+Node name: localhostNode02
+Host name: localhost
+Enable administrative security (recommended): True
+Administrative console port: 9061
+Administrative console secure port: 9044
+HTTP transport port: 9080
+HTTPS transport port: 9443
+Bootstrap port: 2809
+SOAP connector port: 8880
+Run application server as a service: False
+Create a Web server definition: False
+
+TO Start Application Server
+TO Start Application Server
+/opt/IBM/WebSphere/AppServer/profiles/AppSrv01/bin/startServer.sh server1
+
+Verify the Application server status
+ps -ef | grep -i server1
+
+To check all available profiles
+/opt/IBM/WebSphere/AppServer/bin/manageprofiles.sh -listProfiles
+
+To check number of profiles created
+cat /opt/IBM/WebSphere/AppServer/properties/profileRegistry.xml
+
+Profile managament logs during creation
+/opt/ibm/WebSphere/AppServer/logs/manageprofiles/pmt.log
+
+TO Stop Application server
+/opt/IBM/WebSphere/AppServer/profiles/AppSrv01/bin/stopServer.sh server1
+
+To delete Application server
+/opt/ibm/WebSphere/AppServer/bin
+./manageprofiles.sh -delete -profileName AppSrv02
+
+To verify the properties of DMGR:-
+cat /opt/IBM/WebSphere/AppServer/profiles/AppSrv01/properties/portdef.props
+
+=========================================================================================
+							AppServer Deletion
+=========================================================================================
+
+To see the list of app servers:-
+/opt/ibm/WebSphere/AppServer/bin/
+./manageprofiles.sh -listProfiles
+
+Check the status of server:-
+/opt/ibm/WebSphere/AppServer/profiles/appsrv02/bin/serverStatus.sh -all
+
+/opt/ibm/WebSphere/AppServer/bin
+./manageprofiles.sh -delete -profileName AppSrv01
+
+=========================================================================================
+							Custom profile creation
+=========================================================================================
+
+./manageprofiles.sh -create -profileName Custom01 -profilePath /opt/ibm/WebSphere/AppServer/profiles/Custom01 -templatePath /opt/ibm/WebSphere/AppServer/profileTemplates/managed -cellName localhostCell01 -hostName localhost -nodeName localhostNode01 -enableAdminSecurity true -adminUserName admin -adminPassword admin
+
+=========================================================================================
+							Admin agent creation
+=========================================================================================
+
+manageprofiles.sh -create -profileName /opt/ibm/WebSphere/AppServer/profiles/AdminAgent01 -templatePath /opt/IBM/WebSphere/AppServer/profileTemplates/management -serverType ADMIN_AGENT
+
+=========================================================================================
+							JOB MANAGER creation
+=========================================================================================
+
+manageprofiles.sh -create -profileName /opt/ibm/WebSphere/AppServer/profiles/Jobmanager01 -templatePath /opt/IBM/WebSphere/AppServer/profileTemplates/management/ -serverType JOB_MANAGER
+
+
+=========================================================================================
+							To run the applications
+=========================================================================================
+eg URL:- http://localhost:9080/snoop
+
+To check the deployment descriptor:- 
+Applications --> WebSphere enterprise Applications --> Default Application --> Manage modules --> DefaultWebApplication.ear --> Deployment Descriptior
+
+Eg:-
+<servlet-mapping id="ServletMapping_1" >
+ <servlet-name> Snoop Servlet</servlet-name>
+ <url-pattern> /snoop/*</url-pattern>
+ </servlet-mapping> 
+
+To check the context root:-
+Applications --> WebSphere enterprise Applications --> Default Application --> Context Root for Web Modules 
+
+=========================================================================================
+								Creating clustering network 
+=========================================================================================
+
+Login to admin console
+https://localhost:9043/ibm/console/
+
+
+Administrative console:
+1) Go to Servers --> Clusters --> WebSphere Application server Clusters --> New
+2) Provide the cluster name (Cluster1) --> Next
+3) Provide the First Member name(Server1) --> Select the node --> Next
+4) Provide the Second Member name(Server2) --> Select the node --> Add Member --> Next
+5) Click on Finish
+6) Click on Review --> Select Synchronize changes with Nodes --> Save
+
+Wsaadmin console:
+./wsadmin.sh -lang jython - login with jython prompt (by default jacl)
+
+AdminTask.createCluster('[-clusterConfig [-clusterName visioncore_cluster -preferLocal true]]')
+
+AdminConfig.save() - Need to execute this to save the wsadmin commands
+
+Starting the Cluster:-
+Go to Servers --> Clusters --> WebSphere Application server Clusters --> Select the cluster name(Cluster1) --> Start
+
+Note:- It will start all the members of cluster as well.
+
+Adding Virtual hosts:-
+To run the applications we need to add the Cluster member ports(Server1 and Server2) to virtual hosts
+
+Verifying the ports
+1) Go to Servers --> WebSphere Application Servers --> Click on server(Server1) --> Click on ports --> WC_defaulthost(9081) 
+2) Go to Servers --> WebSphere Application Servers --> Click on server(Server2) --> Click on ports --> WC_defaulthost(9082)
+
+Adding the ports
+1) Go to Environment --> Virtual hosts --> Click on default_host --> Click on Host Aliases --> New --> provide the port(9081) --> Review --> Syncronize --> Save
+1) Go to Environment --> Virtual hosts --> Click on default_host --> Click on Host Aliases --> New --> provide the port(9082) --> Review --> Syncronize --> Save
+
+Deploying Applications in Cluster(Cluster1)
+1) Go to Applications --> Application Types --> WebSphere enterprise applications --> Click on DefaultApplication --> ManageModules 
+2) Select the Clusters and Servers --> Select the Modules --> Click on ok
+
+Verification:-
+1) Execute in url:- http://localhost:9081/snoop
+It will run the application
+ 
+2) Execute in url:- http://localhost:9082/snoop
+It will open the Application
+
+Now stop any of the server(Say Server1) 
+
+=========================================================================================
+								Deletion of clustering network
+=========================================================================================
+1) Go to Servers --> Clusters --> WebSphere Application server Clusters --> Select the Cluster --> Stop
+2) Go to Servers --> Clusters --> WebSphere Application server Clusters --> Select the Cluster --> Delete
+
+
+=========================================================================================
+								Deploying Applications
+=========================================================================================
+
+Path of Ear files:-
+/opt/ibm/WebSphere/AppServer/installableApps/DefaultApplication.ear
+
+
+
+
+
+
+==================================================================================================================
+
+WebSphere SIB(Service Integration Bus):-
+
+Creating SIB:-
+
+1) Service Integration --> Buses --> New --> Enter name(InternalJMS), uncheck Bus security --> next --> Finish
+
+Adding a Member to SIB:-
+1) Service Integration --> Buses --> Click on bus name (InternalJMS) --> Bus members 
+2) Click on  Add --> Select the server --> Next --> Select the option File store --> Next --> Next --> Next --> Finish --> Save
+
+Configuring JMS:-
+
+Creating Queue connection factory:-
+
+1)  Resources --> JMS --> Queue connection factories --> Select Cell --> click on new --> Select the option (Default messaging provider) --> ok
+2)  Type Nname=QCF.Test, JNDI name= jms/QCF.Test, Select the bus name as "InternalJMS" --> Click on Apply and save
+
+Creating Queue definitions:-
+
+1) Resources --> JMS --> Queues --> New --> Select "Default Messaging Provider" --> ok
+2) Provide Name=Q.Test, JNDI Name=jms/Q.Test, Bus name=InternalJMS, Select Queue name=Create Service Bus destination, identifier=QD.Test --> Next --> Next --> Finish --> Save
+
+Viewing Queue definitions:-
+1) Service Integration --> Buses --> Click on bus name (InternalJMS) --> Destinations
+
+======================
+
+Wsadmin commands:
+
+path: /app/IBM/WebSphere855/AppServer/profiles/Dmgr01/bin
+
+./wsadmin.sh -lang jython
+
+AdminTask.createCluster('[-clusterConfig [-clusterName visioncore_cluster -preferLocal true]]')
+
+AdminTask.createClusterMember('[-clusterName visioncore_cluster -memberConfig [-memberNode vsnuatapp1Node01 -memberName visioncore_jvm -genUniquePorts true -replicatorEntry false]]')
+
+
+
+To get the list of queues available for cell level
+wsadmin>$AdminConfig getid /Cell:vsnpreqmgapp1Cell01
+
+Output: vsnpreqmgapp1Cell01(cells/vsnpreqmgapp1Cell01|cell.xml#Cell_1)
+
+
+To get the list of queues available for Node level
+wsadmin>$AdminConfig getid /Cell:vsnpreqmgapp1Cell01/Node:vsnuatapp1Node01
+
+wsadmin>$AdminTask listWMQQueues vsnpreqmgapp1Cell01(cells/vsnpreqmgapp1Cell01|cell.xml#Cell_1)
+
+AdminTask.createWMQQueue("vsnpreqmgapp1Cell01(cells/vsnpreqmgapp1Cell01|cell.xml#Cell_1)", ["-name APP.PROCESS.Q -jndiName mq/APP.PROCESS.Q -queueName APP.PROCESS.Q"]) 
+
+
+=========================================================================================
+							Creation of JDBC providers and Datasources
+=========================================================================================
+
+Admin console --> Resources --> JDBC --> JDBC providers --> Select the scope  --> New  --> Provide below details
+
+Database type --> Oracle
+Information required Provider type --> Oracle JDBC Driver
+Information required Implementation type --> Connection pool data source/XA data source
+
+Click on next 
+
+Directory location for "ojdbc6.jar" which is saved as WebSphere variable ${ORACLE_JDBC_DRIVER_PATH} : 
+
+default location:<Working dir>/lib 
+
+Click on next --> Finish. --> Review and Save the master configuration.
+
+===========
+
+Datasources
+Click on datasource created --> Click on JDBC providers --> New:
+
+
+
+Admin console --> Resources --> JDBC --> JDBC providers --> Click on Oracle JDBC Driver --> Click on Data Sources --> New 
+
+Select the scope
+Data source name: NGE
+JNDI name: jdbc/NGE
+Database type: ORACLE
+URL: jdbc:oracle:thin:@e1coredb1:1621:vptapps
+
+COnfigure J2c
+
+User-id: will be database user-id(eg NGX)
+Passsword will be database password(eg NGX)
+
+
+Select the mappings and finish
+
+IBM DB2
+jdbc:db2://<HOST>:<PORT>/<DB>
+jdbc:db2://localhost:<PORT>/<DB>
+COM.ibm.db2.jdbc.app.DB2Driver
+
+
+Click on next --> Finish --> Review and Save the master configuration.
+
+Admin console --> Resources --> JDBC --> JDBC providers --> Oracle JDBC Driver > Data sources > Oracle JDBC Driver DataSource --> Click on JAAS --> New --> 
+
+=========================================================================================
+				JAAS:- Java authentication and authorization service.
+=========================================================================================
+
+Information required Alias : JDBC provider
+Information required User ID: SYSTEM
+Information required Password: admin123
+
+Click on ok --> Review and Save the master configuration.
+
+User-id: will be database user-id(eg NGX)
+Passsword will be database password(eg NGX)
+
+=========================================================================================
+							JMS Configuration
+=========================================================================================
+
+In order for the WAS Applications to put/get messages from the queue, we need to configure JMS configurations
+
+JMS Configurations can be done by using either Connection factories /Queue Connection Factories
+
+Connection factories can be used for both MQ and other service providers like SIB
+
+Queue Connection Factories will be used for only MQ configurations
+
+
+Connection Factory/Queue connection factories:-
+==============
+Select the scope
+Name: SampleMDBConnectionFactory
+JMS resource provider: WebSphere MQ messaging provider
+JNDI Name: jms/SampleMDBConnectionFactory : This name is configured in Applications and will be given to us to configure in JMS configuration
+Queue Manager: QM_MDB
+Transport: Bindings, then client
+Hostname: vsnprdQM1
+Port: 1420
+Server connection channel: vsnprdQM1.svrconn
+
+Queue:-
+==============
+Select the scope
+JMS resource provider: WebSphere MQ messaging provider
+Name: NGE.ENTRY
+JNDI Name: mq/NGE.ENTRY
+Queue Name in MQ: NGE.ENTRY
+
+==============================================================================================
+
+
+
+
+
+
+
+
+
+
+
+
